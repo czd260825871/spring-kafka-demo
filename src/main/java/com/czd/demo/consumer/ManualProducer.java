@@ -65,6 +65,6 @@ public class ManualProducer {
 
     @PostConstruct
     public void init(){
-        new Thread(this::consumer).start();
+//        new Thread(this::consumer).start();
     }
 }

@@ -6,6 +6,7 @@ import org.springframework.kafka.annotation.TopicPartition;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author admin
@@ -13,10 +14,16 @@ import java.util.List;
 @Component
 public class KafkaTestConsumer {
 
-    @KafkaListener(topics = {"czd"}, id = "group1", containerFactory = "batchContainerFactory",
-            topicPartitions = {@TopicPartition(topic = "czd", partitions = {"0"})})
+    @KafkaListener(topics = {"czd"}, id = "group1", containerFactory = "batchContainerFactory")
     public void consumer(List<ConsumerRecord<?, ?>> records){
-        System.out.println(records);
-        System.out.println(1);
+        System.out.println(records.size());
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
+
+
+
 }

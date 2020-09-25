@@ -12,7 +12,6 @@ import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
-import org.springframework.kafka.listener.ContainerProperties;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -128,9 +127,9 @@ public class KafkaTemplateConfig {
         container.setConsumerFactory(new DefaultKafkaConsumerFactory(consumerCacheConfigs()));
         //设置并发量，小于或等于Topic的分区数
         container.setConcurrency(Integer.valueOf(concurrency));
+        container.setAutoStartup(false);
         //设置为批量监听
         container.setBatchListener(true);
-        container.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL_IMMEDIATE);
         return container;
     }
 }
